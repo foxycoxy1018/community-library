@@ -14,17 +14,19 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user')
-//const dbUrl = process.env.DB_URL
-//'mongodb://localhost:27017/community-library'
+const dbUrl = process.env.DB_URL;
+const localUrl = process.env.localUrl;
 const userRoutes = require('./routes/users');
 const bookRoutes = require('./routes/books');
 const cartRoutes = require('./routes/cart');
 const MongoDBStore = require('connect-mongo');
+const secret = process.env.secret;
+const sessionName = process.env.sessionName;
 
 const app = express();
 
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb://localhost:27017/community-library')
+mongoose.connect(dbUrl)
 .then(() => {
     console.log("MONGO CONNECTION OPEN");
 })
@@ -42,11 +44,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const sessionConfig = {
     store: MongoDBStore.create({
-        mongoUrl:'mongodb://localhost:27017/community-library',
-        secret: 'thisisnotagreatsecret!', 
+        mongoUrl:dbUrl,
+        secret: secret, 
         touchAfter: 24*3600}),
-    name: 'tbwoJ*',
-    secret: 'thisisnotagreatsecret!', 
+    name: sessionName,
+    secret: secret, 
     resave: false, 
     saveUninitialized: false, 
     cookie: {

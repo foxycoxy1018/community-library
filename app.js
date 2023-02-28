@@ -15,12 +15,12 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user')
 const dbUrl = process.env.DB_URL;
-const localUrl = process.env.localUrl;
+const localUrl = process.env.LOCAL_URL;
 const userRoutes = require('./routes/users');
 const bookRoutes = require('./routes/books');
 const cartRoutes = require('./routes/cart');
 const MongoDBStore = require('connect-mongo');
-const secret = process.env.secret;
+const secret = process.env.SECRET;
 const sessionName = process.env.sessionName;
 
 const app = express();

@@ -1,0 +1,56 @@
+<% layout('layouts/boilerplate') %> 
+<%- include('../partials/navbar') %> 
+<div class="container">
+    <div class="row justify-content-around">
+        <div class="col-4 my-auto">
+            <div class="">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><%= book.title %> </h5>
+                        <p class="card-text"><%= book.author %> </p>
+                        <p class="card-text text-muted">Posted by: <%= book.owner.username %> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="d-flex justify-content-center align-items-center mt-5 mb-5">
+                <form actions="/cart/<%=book._id%>/checkout" method="POST" class="validated-form" novalidate>
+                    <h1 class="mt-5">
+                        Shipping Address
+                    </h1>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="name" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="street" class="form-label">Street Address</label>
+                        <input type="text" class="form-control" id="street" name="street" aria-describedby="street" required>
+                        <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                    </div>
+                    <div class="mb-3">
+                        <label for="city" class="form-label">City</label>
+                        <input type="city" class="form-control" id="city" name="city" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="select" class="form-label">State</label>
+                        <select id="state" class="form-select" id="select" name="state">
+                        </select>
+                      </div>
+                    <div class="mb-3">
+                        <label for="zip" class="form-label">Zip Code</label>
+                        <input type="zip" class="form-control" id="zip" name="zip" required>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                        <label class="form-check-label" for="exampleCheck1">I understand that the given address will be sent to the owner of this book via email.<br> 
+                            Community Library does not keep this data. 
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

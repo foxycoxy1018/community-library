@@ -1,0 +1,64 @@
+<% layout('/layouts/boilerplate') %>
+<%- include('../partials/navbar') %> 
+<div class="container mt-5">
+    <div class="row">
+        <% if(user.cartedBooks.length === 0){ %>
+            <h2 class="mt-5 text-center">You have no books in your cart!</h2>
+        <% }else{ %>
+            <div class="col-lg-6 mt-5">
+                <h2>Cart</h2><hr>
+                <% let cartedBooks = 0; let soldBooks = 0; %>
+                <% for(let book of user.cartedBooks) { %> 
+                    <% if(book.isSold === false){ %>
+                        <% cartedBooks += 1; %>
+                        <div class="card col-10 mt-4">
+                            <div class="row">
+                                <div class="col-md-5 offset-1">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= book.title %> </h5>
+                                        <p class="card-text">By: <%= book.author %></p>
+                                        <p class="card-text text-muted">Posted by: <%= book.owner.username %></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mt-4">
+                                    <a href="cart/<%= book._id%>/checkout" class="btn check-out mb-3">Request Book</a>
+                                    <form action="/cart/<%=book._id%>?_method=DELETE" method="POST">
+                                        <button class="btn btn-danger">Remove from Cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                <% }else{soldBooks+=1}} if(cartedBooks === 0){ %>
+                    <h3 class="mt-4">There are no books in your cart!</h3>
+                <%} %>
+            </div>
+            <% if(soldBooks > 0){ %>
+                <div class="mt-5 col-lg-6">
+                    <h2>Past Orders</h2><hr>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Re-request?</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% for(let book of user.cartedBooks) { %> 
+                            <% if(book.isSold === true){ %>
+                            <tr>
+                                <td><%= book.title %></td>
+                                <td><%= book.author %></td>
+                                <td><a href="cart/<%= book._id%>/checkout">Re-request Book</a></td>
+                            </tr>
+                            <% }} %>
+                        </tbody>
+                    </table>
+                </div>
+        <% }} %>
+    </div>
+</div>
+
+
+
+

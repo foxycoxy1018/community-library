@@ -1,0 +1,42 @@
+<% layout('layouts/boilerplate') %> 
+<%- include('../partials/navbar') %> 
+<div class="container d-flex justify-content-center align-items-center mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2 col-xl-6 offset-xl-3">
+            <div class="card mt-5 shadow">
+                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
+                    alt="" class="card-img-top" />
+                <div class="card-body">
+                    <h5 class="card-title">Register</h5>
+                    <form action="/register" method="POST" class="validated-form" novalidate>
+                        <div class="mb-3">
+                            <label class="form-label" for="username">Username <span class="information" data-hover="This is what will show up as the name associated with this account.">&#9432</span></label>
+                            <input class="form-control" type="text" id="username" name="username" required autofocus>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Email <span class="information" data-hover="We need an email to verify your account.">&#9432</span></label>
+                            <input class="form-control" type="email" id="email" name="email" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Password</label>
+                            <input class="form-control" type="password" id="password" name="password" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button class="mt-3 btn btn-block">Verify Email</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

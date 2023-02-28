@@ -1,0 +1,35 @@
+<% layout('/layouts/boilerplate') %>
+<%- include('../partials/navbar') %> 
+<div class="container mt-5">
+    <div class="row row-cols-2 offset-4">
+        <div class="col">
+            <div class="card my-5">
+                <div class="card-body text-center">
+                    <h5 class="card-title"><%= book.title %> </h5>
+                    <p class="card-text">By: <%= book.author %> </p>
+                    <p class="card-text text-muted">Posted by: <%= book.owner.username %> </p>
+                    <!-- <button type="button" class="check-out btn btn-outline-success">Check-Out</button> -->
+                    
+                    <% if(currentUser && book.owner.equals(currentUser._id)){ %> 
+                    <div class="row mx-2">
+                        <a href="/books/<%=book._id%>/edit" type="button" class="btn btn-show btn-warning col mb-3">Edit Book</a>
+                    
+                        <form action="/books/<%=book._id%>?_method=DELETE" method="POST">
+                            <div class="row"><button class="btn btn-danger btn-show">Delete</button></div>
+                        </form>
+                    </div>
+                    <% } else{ %> 
+                        <form action="/books/<%=book._id%>/addToCart" method="POST">
+                            <% if(currentUser && currentUser.cartedBooks.includes(book._id)){ %>
+                                <p class="text-muted">You already have this in your cart.</p>
+                            <!-- <button class="check-out btn btn-success" disabled>Check-Out</button> -->
+                            <% } else{ %> 
+                            <button class="check-out btn" >Add to Cart</button>
+                            <% } %> 
+                        </form>
+                        <% } %> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

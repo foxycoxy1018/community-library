@@ -1,0 +1,29 @@
+<% layout('/layouts/boilerplate') %>
+<%- include('../partials/navbar') %> 
+<div class="container mt-5">
+    <div class="row">
+        <h1 class="text-center mt-5">Edit Book</h1>
+        <div class="col-md-6 offset-md-3">
+            <form action="/books/<%=book._id%>?_method=put" method="POST" class="validated-form" novalidate>
+                <div class="mb-3">
+                    <label class="form-label" for="title">Book Title</label>
+                    <input class="form-control" type="text" name="book[title]" id="title" value="<%=book.title%>" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="author">Author</label>
+                    <input class="form-control" type="text" name="book[author]" id="author" value="<%=book.author%>" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-success">Edit Book</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>

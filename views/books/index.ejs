@@ -1,0 +1,27 @@
+<% layout('/layouts/boilerplate') %>
+<%- include('../partials/mainNavbar') %> 
+<div id="background-pic"></div>
+
+<h1 class="text-center my-5 display-3">Welcome to your Community Library!</h1>
+<div class="text-center mb-5">
+    <a class="btn btn-lg btn-index" href="/books/new">Submit a new book!</a>
+</div>
+
+<div class="container">
+    <div class="row">
+        <% for(book of books) { %> 
+            <% if(book.isCarted === false){ %>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="card mb-3">
+                        <div class="card-body text-center">
+                            <h5 class="card-title"><%= book.title %> </h5>
+                            <p class="card-text"><%= book.author %> </p>
+                            <a href="books/<%=book._id%>" class="btn btn-index">Check-Out</a>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        <% } %> 
+    </div>
+</div>
+

@@ -21,7 +21,7 @@ const bookRoutes = require('./routes/books');
 const cartRoutes = require('./routes/cart');
 const MongoDBStore = require('connect-mongo');
 const secret = process.env.SECRET;
-const sessionName = process.env.sessionName;
+const sessionName = process.env.SESSION_NAME;
 
 const app = express();
 

@@ -78,6 +78,11 @@ app.use('/books', bookRoutes);
 app.use('/', userRoutes);
 app.use('/cart', cartRoutes);
 
+app.get('/', async(req, res) => {
+    const books = await Book.find({});
+    res.render('books/index', {books})
+})
+
 app.get('/about', (req, res) => {
     res.render('about')
 })

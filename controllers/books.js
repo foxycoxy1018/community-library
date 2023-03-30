@@ -20,12 +20,11 @@ module.exports.createBook = async (req, res) => {
 
 module.exports.showBook = async (req, res) => {
     const book = await Book.findById(req.params.id).populate('owner');
-    console.log("hi");
     if(!book){
         req.flash('error', 'Cannot find that book.');
         return res.redirect('/books');
     }
-    console.log(book);
+    //console.log(book);
     res.render('books/show', {book});
 }
 

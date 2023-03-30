@@ -1,5 +1,5 @@
 //if (process.env.NODE_ENV !== "production") {}
-    require('dotenv').config();
+require('dotenv').config();
 
 
 const express = require('express');
@@ -9,16 +9,19 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const ExpressError = require('./utils/ExpressError');
 const ejsMate = require('ejs-mate')
-const Book = require('./models/book')
 const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const User = require('./models/user')
+
 const dbUrl = process.env.DB_URL;
 const localUrl = process.env.LOCAL_URL;
+
+const Book = require('./models/book')
+const User = require('./models/user')
 const userRoutes = require('./routes/users');
 const bookRoutes = require('./routes/books');
 const cartRoutes = require('./routes/cart');
+
 const MongoDBStore = require('connect-mongo');
 const secret = process.env.SECRET;
 const sessionName = process.env.SESSION_NAME;
@@ -26,7 +29,7 @@ const sessionName = process.env.SESSION_NAME;
 const app = express();
 
 mongoose.set('strictQuery', false);
-mongoose.connect(dbUrl)
+mongoose.connect(localUrl)
 .then(() => {
     console.log("MONGO CONNECTION OPEN");
 })
@@ -78,7 +81,7 @@ app.use('/books', bookRoutes);
 app.use('/', userRoutes);
 app.use('/cart', cartRoutes);
 
-app.get('/', async(req, res) => {
+app.get('/', async(req, res) => { //home page is same as books index page
     const books = await Book.find({});
     res.render('books/index', {books})
 })
@@ -87,7 +90,7 @@ app.get('/about', (req, res) => {
     res.render('about')
 })
 
-app.all('*', (req, res, next) => {
+app.all('*', (req, res, next) => { //catch-all for urls that do not exist
     next (new ExpressError("Page not found.", 404))
 })
 

@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const books = require('../controllers/books')
-const Book = require('../models/book');
-const User = require('../models/user');
+//const Book = require('../models/book');
+//const User = require('../models/user');
 const {isLoggedIn, isOwner, isVerified} = require('../middleware');
 
 router.route('/')

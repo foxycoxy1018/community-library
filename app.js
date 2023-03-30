@@ -29,7 +29,7 @@ const sessionName = process.env.SESSION_NAME;
 const app = express();
 
 mongoose.set('strictQuery', false);
-mongoose.connect(localUrl)
+mongoose.connect(dbUrl)
 .then(() => {
     console.log("MONGO CONNECTION OPEN");
 })
